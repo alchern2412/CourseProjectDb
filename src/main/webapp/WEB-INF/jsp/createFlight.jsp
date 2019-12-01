@@ -53,53 +53,70 @@
             <div class="form-row mb-4">
                 <div class="col">
                     <!-- Departure Date -->
-                    <input type='text' name="departure-date" aria-describedby="departureDateHelpBlock" class="form-control" id='datePickerDeparture'/>
-<%--                    <input type="text" class="form-control" aria-describedby="departureDateHelpBlock" name="departure-date">--%>
+                    <input type='text' name="departure-date" aria-describedby="departureDateHelpBlock"
+                           class="form-control" id='datePickerDeparture'/>
+                    <%--                    <input type="text" class="form-control" aria-describedby="departureDateHelpBlock" name="departure-date">--%>
                     <small id="departureDateHelpBlock" class="form-text text-muted mb-4">
                         <fmt:message key="content.createflight.label.departuredate" bundle="${BundleContent}"/>
                     </small>
                 </div>
                 <div class="col">
                     <!-- Arrival Date -->
-                    <input type='text' name="arrival-date" aria-describedby="arrivalDateHelpBlock" class="form-control" id='datePickerArrival'/>
+                    <input type='text' name="arrival-date" aria-describedby="arrivalDateHelpBlock" class="form-control"
+                           id='datePickerArrival'/>
 
-<%--                    <input type="text" class="form-control" aria-describedby="arrivalDateHelpBlock" name="arrival-date">--%>
+                    <%--                    <input type="text" class="form-control" aria-describedby="arrivalDateHelpBlock" name="arrival-date">--%>
                     <small id="arrivalDateHelpBlock" class="form-text text-muted mb-4">
                         <fmt:message key="content.createflight.label.arrivaldate" bundle="${BundleContent}"/>
                     </small>
                 </div>
             </div>
 
-            <div class="form-row mb-4">
-                <div class="col">
-                    <!-- Passengers -->
-                    <fmt:message key="content.createflight.label.passengers" var="placeholderPassengers" bundle="${BundleContent}"/>
-                    <input value="0" type="number" class="form-control" name="passengers" placeholder="${placeholderPassengers}">
-                </div>
-                <div class="col">
-                    <!-- All Passengers -->
-                    <fmt:message key="content.createflight.label.allpassengers" var="placeholderAllPassengers" bundle="${BundleContent}"/>
-                    <input type="number" class="form-control" name="all-passengers" placeholder="${placeholderAllPassengers}">
-                </div>
-            </div>
+            <%--            <div class="form-row mb-4">--%>
+            <%--                <div class="col">--%>
+            <%--                    <!-- Passengers -->--%>
+            <%--                    <fmt:message key="content.createflight.label.passengers" var="placeholderPassengers" bundle="${BundleContent}"/>--%>
+            <%--                    <input value="0" type="number" class="form-control" name="passengers" placeholder="${placeholderPassengers}">--%>
+            <%--                </div>--%>
+            <%--                <div class="col">--%>
+            <%--                    <!-- All Passengers -->--%>
+            <%--                    <fmt:message key="content.createflight.label.allpassengers" var="placeholderAllPassengers" bundle="${BundleContent}"/>--%>
+            <%--                    <input type="number" class="form-control" name="all-passengers" placeholder="${placeholderAllPassengers}">--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
 
             <div class="form-row mb-4">
                 <div class="col">
                     <!-- Price Flight -->
-                    <fmt:message key="content.createflight.label.priceflight" var="placeholderPriceFlight" bundle="${BundleContent}"/>
-                    <input type="number" step="0.01" class="form-control" name="price-flight" placeholder="${placeholderPriceFlight}">
+                    <fmt:message key="content.createflight.label.priceflight" var="placeholderPriceFlight"
+                                 bundle="${BundleContent}"/>
+                    <input type="number" step="0.01" class="form-control" name="price-flight"
+                           placeholder="${placeholderPriceFlight}">
                 </div>
+                <%--                <div class="col">--%>
+                <%--                    <!-- Price Luggage -->--%>
+                <%--                    <fmt:message key="content.createflight.label.priceluggage" var="placeholderPriceLuggage" bundle="${BundleContent}"/>--%>
+                <%--                    <input type="number" step="0.01" class="form-control" name="price-luggage" placeholder="${placeholderPriceLuggage}">--%>
+                <%--                </div>--%>
                 <div class="col">
-                    <!-- Price Luggage -->
-                    <fmt:message key="content.createflight.label.priceluggage" var="placeholderPriceLuggage" bundle="${BundleContent}"/>
-                    <input type="number" step="0.01" class="form-control" name="price-luggage" placeholder="${placeholderPriceLuggage}">
+                    <!-- Plain -->
+                    <select name="plain" class="form-control" aria-describedby="plainHelpBlock">
+                        <c:forEach var="plain" items="${allPlains}">
+                            <option value="${plain.id}"><c:out value="${plain.number} - ${plain.name}"/></option>
+                        </c:forEach>
+                    </select>
+
+                    <small id="plainHelpBlock" class="form-text text-muted mb-4">
+                        <fmt:message key="content.createflight.label.plain" bundle="${BundleContent}"/>
+                    </small>
                 </div>
             </div>
 
 
-            <!-- Description -->
-            <fmt:message key="content.createflight.label.description" var="placeholderDescription" bundle="${BundleContent}"/>
-            <input type="text" class="form-control mb-4" name="description" placeholder="${placeholderDescription}">
+            <%--            <!-- Description -->--%>
+            <%--            <fmt:message key="content.createflight.label.description" var="placeholderDescription" bundle="${BundleContent}"/>--%>
+            <%--            <input type="text" class="form-control mb-4" name="description" placeholder="${placeholderDescription}">--%>
+
 
             <button class="btn btn-info my-4 btn-block" type="submit">
                 <fmt:message key="content.createflight.button.createflight" bundle="${BundleContent}"></fmt:message>

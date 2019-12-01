@@ -11,4 +11,6 @@ public interface FlightService {
 
     List<Flight> getFlightsByRequest(FlightDTO flightDTO) throws FlightServiceException;
 
+    Flight create(FlightDTO flightDTO) throws FlightServiceException;
+
 }

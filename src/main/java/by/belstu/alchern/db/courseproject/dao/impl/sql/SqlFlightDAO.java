@@ -9,12 +9,10 @@ import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.DbParameterName;
 import by.belstu.alchern.db.courseproject.model.impl.Flight;
 import org.apache.log4j.Logger;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 public class SqlFlightDAO implements FlightDAO {
     private static final Logger LOGGER = Logger.getLogger(SqlFlightDAO.class.getSimpleName());
@@ -125,8 +123,8 @@ public class SqlFlightDAO implements FlightDAO {
             callableStatement.setInt(1, flight.getFrom_airport().getId());
             callableStatement.setInt(2, flight.getTo_airport().getId());
             callableStatement.setInt(3, flight.getPlain().getId());
-//            callableStatement.setTimestamp(4, flight.getDeparture());
-//            callableStatement.setTimestamp(5, flight.getArrival());
+            callableStatement.setTimestamp(4, new Timestamp(flight.getDeparture().getTime()));
+            callableStatement.setTimestamp(5, new Timestamp(flight.getArrival().getTime()));
             callableStatement.setDouble(6, flight.getPrice());
 
             boolean hadResults = callableStatement.execute();
@@ -172,8 +170,8 @@ public class SqlFlightDAO implements FlightDAO {
             callableStatement.setInt(2, flight.getFrom_airport().getId());
             callableStatement.setInt(3, flight.getTo_airport().getId());
             callableStatement.setInt(4, flight.getPlain().getId());
-//            callableStatement.setTimestamp(5, flight.getDeparture());
-//            callableStatement.setTimestamp(6, flight.getArrival());
+            callableStatement.setTimestamp(5, new Timestamp(flight.getDeparture().getTime()));
+            callableStatement.setTimestamp(6, new Timestamp(flight.getArrival().getTime()));
             callableStatement.setDouble(7, flight.getPrice());
             boolean hadResults = callableStatement.execute();
 

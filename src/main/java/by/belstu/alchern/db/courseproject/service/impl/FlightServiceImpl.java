@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class FlightServiceImpl implements FlightService {
+
+    private static final String dateFormat = "MM/dd/yyyy hh:mm a";
+
     @Override
     public List<Flight> getByPageNum(int pageNum) throws FlightServiceException {
         List<Flight> flights = null;
@@ -52,5 +55,26 @@ public class FlightServiceImpl implements FlightService {
             throw new FlightServiceException(e);
         }
         return flights;
+    }
+
+    @Override
+    public Flight create(FlightDTO flightDTO) throws FlightServiceException {
+        // Flight validation
+
+        Flight flight = new Flight();
+        DAOFactory factory = DAOFactory.getInstance();
+        try {
+            flight.setFrom_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getFromAirport())));
+            flight.setTo_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getToAirport())));
+            flight.setDeparture(new SimpleDateFormat(dateFormat).parse(flightDTO.getDeparture()));
+            flight.setArrival(new SimpleDateFormat(dateFormat).parse(flightDTO.getArrival()));
+            flight.setPlain(factory.getPlainDAO().get(Integer.parseInt(flightDTO.getPlain())));
+            flight.setPrice(Double.parseDouble(flightDTO.getPrice()));
+            DAOFactory.getInstance().getFlightDAO().insert(flight);
+        } catch (DAOException | ParseException e) {
+            throw new FlightServiceException(e);
+        }
+
+        return flight;
     }
 }

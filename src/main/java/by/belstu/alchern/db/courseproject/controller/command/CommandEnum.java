@@ -1,9 +1,9 @@
 package by.belstu.alchern.db.courseproject.controller.command;
 
 import by.belstu.alchern.db.courseproject.controller.command.impl.*;
-import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllFlightsCommand;
-import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllTicketsCommand;
-import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllUsersCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.admin.*;
+import by.belstu.alchern.db.courseproject.controller.command.impl.user.DeleteOrderCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.user.RequestOrderCommand;
 import by.belstu.alchern.db.courseproject.controller.command.impl.user.UserOrdersCommand;
 
 public enum CommandEnum {
@@ -37,21 +37,21 @@ public enum CommandEnum {
             this.command = new FindFlightCommand();
         }
     },
-//    REQUEST_ORDER {
-//        {
-//            this.command = new RequestOrderCommand();
-//        }
-//    },
+    REQUEST_ORDER {
+        {
+            this.command = new RequestOrderCommand();
+        }
+    },
     USER_ORDERS {
         {
             this.command = new UserOrdersCommand();
         }
     },
-//    DELETE_ORDER {
-//        {
-//            this.command = new DeleteOrderCommand();
-//        }
-//    },
+    DELETE_ORDER {
+        {
+            this.command = new DeleteOrderCommand();
+        }
+    },
     ALL_USERS {
         {
             this.command = new AllUsersCommand();
@@ -62,26 +62,26 @@ public enum CommandEnum {
             this.command = new AllFlightsCommand();
         }
     },
-//    CREATE_FLIGHT {
-//        {
-//            this.command = new CreateFlightCommand();
-//        }
-//    },
-//    EDIT_FLIGHT {
-//        {
-//            this.command = new EditFlightCommand();
-//        }
-//    },
+    CREATE_FLIGHT {
+        {
+            this.command = new CreateFlightCommand();
+        }
+    },
+    EDIT_FLIGHT {
+        {
+            this.command = new EditFlightCommand();
+        }
+    },
     ALL_TICKETS {
         {
             this.command = new AllTicketsCommand();
         }
     },
-//    CONFIRM_TICKET {
-//        {
-//            this.command = new ConfirmTicketCommand();
-//        }
-//    }
+    CONFIRM_TICKET {
+        {
+            this.command = new ConfirmTicketCommand();
+        }
+    }
     ;
     ActionCommand command;
     public ActionCommand getCurrentCommand() {

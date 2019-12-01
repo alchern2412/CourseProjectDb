@@ -1,8 +1,12 @@
 package by.belstu.alchern.db.courseproject.service.impl;
 
 import by.belstu.alchern.db.courseproject.dao.DAOFactory;
+import by.belstu.alchern.db.courseproject.dao.TicketDAO;
+import by.belstu.alchern.db.courseproject.dao.exception.DAOException;
 import by.belstu.alchern.db.courseproject.dao.exception.impl.TicketDAOException;
 import by.belstu.alchern.db.courseproject.model.impl.Ticket;
+import by.belstu.alchern.db.courseproject.model.impl.User;
+import by.belstu.alchern.db.courseproject.service.ServiceProvider;
 import by.belstu.alchern.db.courseproject.service.TicketService;
 import by.belstu.alchern.db.courseproject.service.exception.TicketServiceException;
 
@@ -58,5 +62,43 @@ public class TicketServiceImpl implements TicketService {
             }
         }
         return result;
+    }
+
+    @Override
+    public void createTicket(User user, String flightId) throws TicketServiceException {
+        DAOFactory factory = DAOFactory.getInstance();
+
+        Ticket ticket = new Ticket();
+        try {
+            ticket.setFlight(factory.getFlightDAO().get(Integer.parseInt(flightId)));
+            ticket.setUser(factory.getUserDAO().get(user.getId()));
+            ticket.setConfirmed(false);
+            factory.getTicketDAO().insert(ticket);
+        } catch (DAOException e) {
+            throw new TicketServiceException(e);
+        }
+    }
+
+    @Override
+    public void deleteTicket(int idDeleteTicket) throws TicketServiceException {
+        try {
+            Ticket ticket = new Ticket();
+            ticket.setId(idDeleteTicket);
+            DAOFactory.getInstance().getTicketDAO().delete(ticket);
+        } catch (DAOException e) {
+            throw new TicketServiceException(e);
+        }
+    }
+
+    @Override
+    public void confirmTicket(int ticketId) throws TicketServiceException {
+        TicketDAO ticketDAO = DAOFactory.getInstance().getTicketDAO();
+        try {
+            Ticket ticket = ticketDAO.get(ticketId);
+            ticket.setConfirmed(true);
+            ticketDAO.update(ticket);
+        } catch (DAOException e) {
+            throw new TicketServiceException(e);
+        }
     }
 }
