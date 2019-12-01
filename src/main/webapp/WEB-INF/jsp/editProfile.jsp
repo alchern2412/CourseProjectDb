@@ -31,12 +31,12 @@
                 <div class="col">
                     <!-- First name -->
                     <input type="text" class="form-control" name="first-name" placeholder="First name"
-                           value="${user.userData.firstName}">
+                           value="${user.firstName}">
                 </div>
                 <div class="col">
                     <!-- Second name -->
                     <input type="text" class="form-control" name="last-name" placeholder="Last name"
-                           value="${user.userData.lastName}">
+                           value="${user.lastName}">
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
             </small>
 
             <!-- Phone number -->
-            <input type="text" name="phone-number" value="${user.userData.phoneNumber}"
+            <input type="text" name="phone-number" value="${user.tel}"
                    id="defaultRegisterPhonePassword"
                    class="form-control" placeholder="Phone number"
                    aria-describedby="defaultRegisterFormPhoneHelpBlock">
@@ -63,25 +63,25 @@
                 <div class="col">
                     <!-- Document number -->
                     <input type="text" class="form-control" name="document-number"
-                           value="${user.userData.documentNumber}"
+                           value="${user.documentNumber}"
                            placeholder="Document number">
                 </div>
-                <div class="col">
-                    <!-- Validity Period -->
-                    <input type="date" class="form-control" name="validity-period"
-                           value="${user.userData.validityPeriod}"
-                           placeholder="Validity period">
-                </div>
+<%--                <div class="col">--%>
+<%--                    <!-- Validity Period -->--%>
+<%--                    <input type="date" class="form-control" name="validity-period"--%>
+<%--                           value="${user.userData.validityPeriod}"--%>
+<%--                           placeholder="Validity period">--%>
+<%--                </div>--%>
             </div>
             <div class="form-row mb-4">
-                <div class="col">
-                    <!-- Country -->
-                    <input type="text" class="form-control" name="country" value="${user.userData.country}"
-                           placeholder="Country">
-                </div>
+<%--                <div class="col">--%>
+<%--                    <!-- Country -->--%>
+<%--                    <input type="text" class="form-control" name="country" value="${user.userData.country}"--%>
+<%--                           placeholder="Country">--%>
+<%--                </div>--%>
                 <div class="col">
                     <!-- Address -->
-                    <input type="text" class="form-control" name="address" value="${user.userData.address}"
+                    <input type="text" class="form-control" name="address" value="${user.address}"
                            placeholder="address">
                 </div>
             </div>

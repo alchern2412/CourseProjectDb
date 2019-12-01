@@ -22,6 +22,7 @@ public class SqlUserDAO implements UserDAO {
 
     // services
     private static final String LOGIN = "{call usp_usersLogin(?, ?)}";
+    private static final String GET_BY_RANGE = "{call usp_usersSelectByRange(?, ?)}";
 
 
 
@@ -237,5 +238,45 @@ public class SqlUserDAO implements UserDAO {
         }
 
         return user;
+    }
+
+    @Override
+    public List<User> getByRange(int x1, int x2) throws UserDAOException {
+        List<User> users = new ArrayList<User>();
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(GET_BY_RANGE);
+            callableStatement.setInt(1, x1);
+            callableStatement.setInt(2, x2);
+            boolean hadResults = callableStatement.execute();
+
+            if (hadResults) {
+                resultSet = callableStatement.getResultSet();
+                while (resultSet.next()) {
+                    User user = new User();
+                    user.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    user.setAddress(resultSet.getString(DbParameterName.REQ_USER_ADDRESS));
+                    user.setDocumentNumber(resultSet.getString(DbParameterName.REQ_USER_DOCUMENT_NUMBER));
+                    user.setFirstName(resultSet.getString(DbParameterName.REQ_USER_FIRST_NAME));
+                    user.setLastName(resultSet.getString(DbParameterName.REQ_USER_LAST_NAME));
+                    user.setLogin(resultSet.getString(DbParameterName.REQ_USER_LOGIN));
+                    user.setPassword(resultSet.getString(DbParameterName.REQ_USER_PASSWORD));
+                    user.setRole(DAOFactory.getInstance().getRoleDAO().get(resultSet.getInt(DbParameterName.REQ_USER_ROLE_ID)));
+                    user.setTel(resultSet.getString(DbParameterName.REQ_USER_TEL));
+
+                    users.add(user);
+                }
+            }
+        } catch (SQLException | DAOException e) {
+            throw new UserDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
+
+        return users;
     }
 }

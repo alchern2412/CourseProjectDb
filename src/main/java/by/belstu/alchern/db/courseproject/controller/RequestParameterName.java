@@ -42,6 +42,7 @@ public class RequestParameterName {
     public static final String REQ_ATTR_USERS = "users";
     public static final String REQ_ATTR_FLIGHTS = "flights";
     public static final String USER_ROLE_ADMIN = "admin";
+    public static final String USER_ROLE_USER = "user";
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
     public static final String REQ_ATTR_MESSAGE_ERROR = "errorMessage";

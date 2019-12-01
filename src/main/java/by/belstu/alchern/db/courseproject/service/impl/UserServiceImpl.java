@@ -9,6 +9,8 @@ import by.belstu.alchern.db.courseproject.service.UserService;
 import by.belstu.alchern.db.courseproject.service.exception.UserServiceException;
 import by.belstu.alchern.db.courseproject.view.dto.UserDTO;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     private static final int ROLE_USER_ID = 2;
 
@@ -41,5 +43,39 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
+    }
+
+    @Override
+    public User editProfile(User user, UserDTO userDTO) throws UserServiceException {
+        User editedUser = new User();
+        // role and id are not will change
+        editedUser.setRole(user.getRole());
+        editedUser.setId(user.getId());
+
+        editedUser.setLogin(userDTO.getLogin());
+        editedUser.setPassword(userDTO.getPassword());
+        editedUser.setFirstName(userDTO.getFirstName());
+        editedUser.setLastName(userDTO.getLastName());
+        editedUser.setTel(userDTO.getTel());
+        editedUser.setAddress(userDTO.getAddress());
+        editedUser.setDocumentNumber(userDTO.getDocumentNumber());
+        try {
+            DAOFactory.getInstance().getUserDAO().update(editedUser);
+        } catch (DAOException e) {
+            throw new UserServiceException(e);
+        }
+
+        return editedUser;
+    }
+
+    @Override
+    public List<User> getByPageNum(int pageNum) throws UserServiceException {
+        List<User> users = null;
+        try {
+            users = DAOFactory.getInstance().getUserDAO().getByRange((pageNum-1) * 5, (pageNum-1) * 5 + 10 );
+        } catch (UserDAOException e) {
+            throw new UserServiceException(e);
+        }
+        return  users;
     }
 }

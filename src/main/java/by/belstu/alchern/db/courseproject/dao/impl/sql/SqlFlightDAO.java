@@ -25,6 +25,10 @@ public class SqlFlightDAO implements FlightDAO {
     private static final String UPDATE = "{call usp_flightsUpdate(?, ?, ?, ?, ?, ?, ?)}";
     private static final String DELETE = "{call usp_flightsDelete(?)}";
 
+    // services
+    private static final String GET_BY_RANGE = "{call usp_flightsSelectByRange(?, ?)}";
+
+
     @Override
     public Flight get(int id) throws FlightDAOException {
         Flight flight = null;
@@ -217,5 +221,50 @@ public class SqlFlightDAO implements FlightDAO {
             SqlDAO.putBackConnection(connection);
         }
 
+    }
+
+    @Override
+    public List<Flight> getByRange(int x1, int x2) throws FlightDAOException {
+        List<Flight> flights = new ArrayList<Flight>();
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(GET_BY_RANGE);
+            callableStatement.setInt(1, x1);
+            callableStatement.setInt(2, x2);
+            boolean hadResults = callableStatement.execute();
+
+            if (hadResults) {
+                resultSet = callableStatement.getResultSet();
+                while (resultSet.next()) {
+                    Flight flight = new Flight();
+
+                    flight.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    flight.setFrom_airport(DAOFactory.getInstance().getAirportDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_FLIGHT_FROM_AIRPORT_ID
+                            )));
+                    flight.setTo_airport(DAOFactory.getInstance().getAirportDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_FLIGHT_TO_AIRPORT_ID
+                            )));
+                    flight.setPlain(DAOFactory.getInstance().getPlainDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_FLIGHT_PLAIN_ID
+                            )));
+                    flight.setDeparture(resultSet.getTimestamp(DbParameterName.REQ_FLIGHT_DEPARTURE_DATE));
+                    flight.setArrival(resultSet.getTimestamp(DbParameterName.REQ_FLIGHT_ARRIVAL_DATE));
+                    flight.setPrice(resultSet.getDouble(DbParameterName.REQ_FLIGHT_PRICE));
+
+                    flights.add(flight);
+                }
+            }
+        } catch (SQLException | DAOException e) {
+            throw new FlightDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
+
+        return flights;
     }
 }

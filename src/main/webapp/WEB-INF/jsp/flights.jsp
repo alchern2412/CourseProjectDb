@@ -26,10 +26,10 @@
             <thead>
             <tr>
                 <th>
-                    <fmt:message key="content.allflights.table.fromplace" bundle="${BundleContent}"></fmt:message>
+                    <fmt:message key="content.allflights.table.fromairport" bundle="${BundleContent}"></fmt:message>
                 </th>
                 <th>
-                    <fmt:message key="content.allflights.table.toplace" bundle="${BundleContent}"></fmt:message>
+                    <fmt:message key="content.allflights.table.toairport" bundle="${BundleContent}"></fmt:message>
                 </th>
                 <th>
                     <fmt:message key="content.allflights.table.departuredate" bundle="${BundleContent}"></fmt:message>
@@ -47,11 +47,11 @@
                     <fmt:message key="content.allflights.table.priceflight" bundle="${BundleContent}"></fmt:message>
                 </th>
                 <th>
-                    <fmt:message key="content.allflights.table.priceluggage" bundle="${BundleContent}"></fmt:message>
+                    <fmt:message key="content.allflights.table.plain" bundle="${BundleContent}"></fmt:message>
                 </th>
-                <th>
-                    <fmt:message key="content.allflights.table.description" bundle="${BundleContent}"></fmt:message>
-                </th>
+<%--                <th>--%>
+<%--                    <fmt:message key="content.allflights.table.description" bundle="${BundleContent}"></fmt:message>--%>
+<%--                </th>--%>
                 <th>
                     <fmt:message key="content.allflights.table.actions" bundle="${BundleContent}"></fmt:message>
                 </th>
@@ -69,21 +69,22 @@
                     <input hidden name="id-flight" value="${curFlight.id}">
                 </form>
                     <tr>
-                        <td>${curFlight.fromPlace.name}</td>
-                        <td>${curFlight.toPlace.name}</td>
+                        <td>${curFlight.from_airport.name}</td>
+                        <td>${curFlight.to_airport.name}</td>
                         <td>
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                            value="${curFlight.departureDate}"/>
+                                            value="${curFlight.departure}"/>
                         </td>
                         <td>
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                            value="${curFlight.arrivalDate}"/>
+                                            value="${curFlight.arrival}"/>
                         </td>
-                        <td>${curFlight.allPassengers}</td>
-                        <td>${curFlight.passengers}</td>
-                        <td>${curFlight.priceFlight}</td>
-                        <td>${curFlight.priceLuggage}</td>
-                        <td>${curFlight.description}</td>
+                        <td>${curFlight.plain.capacity}</td>
+<%--                        <td>${curFlight.passengers}</td>--%>
+                        <td>???</td>
+                        <td>${curFlight.price}</td>
+                        <td>${curFlight.plain.number}</td>
+<%--                        <td>${curFlight.description}</td>--%>
                         <td>
                             <a class="dropdown-item" onclick="document.getElementById('formFlightUsers${curFlight.id}').submit()" href="#">
                                 <fmt:message key="content.allflights.table.flightspassengers" bundle="${BundleContent}"/>

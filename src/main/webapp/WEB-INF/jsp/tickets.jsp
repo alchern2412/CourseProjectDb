@@ -56,20 +56,20 @@
                     <input hidden name="id-ticket" value="${curTicket.id}">
                 </form>
                 <tr>
-                    <td>${curTicket.flight.fromPlace.name}</td>
-                    <td>${curTicket.flight.toPlace.name}</td>
+                    <td>${curTicket.flight.from_airport.name}</td>
+                    <td>${curTicket.flight.to_airport.name}</td>
                     <td>
                         <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                        value="${curTicket.flight.departureDate}"/>
+                                        value="${curTicket.flight.departure}"/>
                     </td>
                         <%--                        <td>--%>
                         <%--                            <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"--%>
                         <%--                                            value="${curTicket.arrivalDate}"/>--%>
                         <%--                        </td>--%>
 
-                    <td>${curTicket.user.userData.firstName}</td>
-                    <td>${curTicket.user.userData.lastName}</td>
-                    <td>${curTicket.price}</td>
+                    <td>${curTicket.user.firstName}</td>
+                    <td>${curTicket.user.lastName}</td>
+                    <td>${curTicket.flight.price}</td>
 
                     <td>
                         <c:if test="${curTicket.confirmed}">

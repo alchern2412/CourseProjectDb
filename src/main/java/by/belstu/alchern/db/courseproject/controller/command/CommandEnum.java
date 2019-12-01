@@ -1,9 +1,9 @@
 package by.belstu.alchern.db.courseproject.controller.command;
 
-import by.belstu.alchern.db.courseproject.controller.command.impl.LoginCommand;
-import by.belstu.alchern.db.courseproject.controller.command.impl.LogoutCommand;
-import by.belstu.alchern.db.courseproject.controller.command.impl.MainCommand;
-import by.belstu.alchern.db.courseproject.controller.command.impl.RegisterCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.*;
+import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllFlightsCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllTicketsCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllUsersCommand;
 
 public enum CommandEnum {
     LOGIN {
@@ -26,11 +26,11 @@ public enum CommandEnum {
             this.command = new MainCommand();
         }
     },
-//    EDIT_PROFILE {
-//        {
-//            this.command = new EditProfileCommand();
-//        }
-//    },
+    EDIT_PROFILE {
+        {
+            this.command = new EditProfileCommand();
+        }
+    },
 //    FIND_FLIGHT {
 //        {
 //            this.command = new FindFlightCommand();
@@ -51,16 +51,16 @@ public enum CommandEnum {
 //            this.command = new DeleteOrderCommand();
 //        }
 //    },
-//    ALL_USERS {
-//        {
-//            this.command = new AllUsersCommand();
-//        }
-//    },
-//    ALL_FLIGHTS {
-//        {
-//            this.command = new AllFlightsCommand();
-//        }
-//    },
+    ALL_USERS {
+        {
+            this.command = new AllUsersCommand();
+        }
+    },
+    ALL_FLIGHTS {
+        {
+            this.command = new AllFlightsCommand();
+        }
+    },
 //    CREATE_FLIGHT {
 //        {
 //            this.command = new CreateFlightCommand();
@@ -71,11 +71,11 @@ public enum CommandEnum {
 //            this.command = new EditFlightCommand();
 //        }
 //    },
-//    ALL_TICKETS {
-//        {
-//            this.command = new AllTicketsCommand();
-//        }
-//    },
+    ALL_TICKETS {
+        {
+            this.command = new AllTicketsCommand();
+        }
+    },
 //    CONFIRM_TICKET {
 //        {
 //            this.command = new ConfirmTicketCommand();

@@ -28,7 +28,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <!-- Brand -->
-        <a class="navbar-brand" href="/">Low Cost Aircompany</a>
+        <a class="navbar-brand" href="/controller?command=main">Aircompany</a>
 
         <c:choose>
             <c:when test="${sessionScope.user.role.role == 'admin'}">
@@ -132,7 +132,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <a class="nav-link navbar-toggler-right" href="/editprofile">${user.login}</a>
+                        <a class="nav-link navbar-toggler-right" href="/controller?command=edit-profile">${user.login}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="controller?command=logout">

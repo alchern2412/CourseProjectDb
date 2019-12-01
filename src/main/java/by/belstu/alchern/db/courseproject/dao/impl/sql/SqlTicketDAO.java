@@ -24,6 +24,9 @@ public class SqlTicketDAO implements TicketDAO {
     private static final String UPDATE_TICKET = "{call usp_ticketsUpdate(?, ?, ?, ?)}";
     private static final String DELETE_TICKET = "{call usp_ticketsDelete(?)}";
 
+    // services
+    private static final String GET_BY_RANGE = "{call usp_ticketsSelectByRange(?, ?)}";
+
 
     @Override
     public Ticket get(int id) throws TicketDAOException {
@@ -201,5 +204,44 @@ public class SqlTicketDAO implements TicketDAO {
             SqlDAO.putBackConnection(connection);
         }
 
+    }
+
+    @Override
+    public List<Ticket> getByRange(int x1, int x2) throws TicketDAOException {
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(GET_BY_RANGE);
+            callableStatement.setInt(1, x1);
+            callableStatement.setInt(2, x2);
+            boolean hadResults = callableStatement.execute();
+
+            if (hadResults) {
+                resultSet = callableStatement.getResultSet();
+                while (resultSet.next()) {
+                    Ticket ticket = new Ticket();
+                    ticket.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    ticket.setUser(DAOFactory.getInstance().getUserDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_TICKET_USER_ID)
+                    ));
+                    ticket.setFlight(DAOFactory.getInstance().getFlightDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_TICKET_FLIGHT_ID)
+                    ));
+                    ticket.setConfirmed(resultSet.getBoolean(DbParameterName.REQ_TICKET_CONFIRMED));
+
+                    tickets.add(ticket);
+                }
+            }
+        } catch (SQLException | DAOException e) {
+            throw new TicketDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
+
+        return tickets;
     }
 }
