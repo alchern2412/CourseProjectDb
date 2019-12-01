@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface FlightDAO extends EntityDAO<Flight> {
     List<Flight> getByRange(int x1, int x2) throws FlightDAOException;
+
+    List<Flight> getFlightByRequest(Flight flight) throws FlightDAOException;
 }

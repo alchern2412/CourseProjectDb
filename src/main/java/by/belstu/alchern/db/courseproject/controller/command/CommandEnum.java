@@ -32,11 +32,11 @@ public enum CommandEnum {
             this.command = new EditProfileCommand();
         }
     },
-//    FIND_FLIGHT {
-//        {
-//            this.command = new FindFlightCommand();
-//        }
-//    },
+    FIND_FLIGHT {
+        {
+            this.command = new FindFlightCommand();
+        }
+    },
 //    REQUEST_ORDER {
 //        {
 //            this.command = new RequestOrderCommand();

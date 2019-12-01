@@ -40,14 +40,14 @@
                         <div>
                             <h4 class="list-group-item-heading">
                                 <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                                value="${flight.departureDate}"/>
+                                                value="${flight.departure}"/>
                             </h4>
                             <p class="list-group-item-text">
                                 <fmt:message key="content.flightsearch.label.cost" bundle="${BundleContent}"></fmt:message>
-                                : ${flight.priceFlight}</p>
-                            <p class="list-group-item-text">
-                                <fmt:message key="content.flightsearch.label.luggagecost" bundle="${BundleContent}"></fmt:message>
-                                : ${flight.priceLuggage}</p>
+                                : ${flight.price}</p>
+<%--                            <p class="list-group-item-text">--%>
+<%--                                <fmt:message key="content.flightsearch.label.luggagecost" bundle="${BundleContent}"></fmt:message>--%>
+<%--                                : ${flight.priceLuggage}</p>--%>
                         </div>
                     </label>
                 </c:forEach>
