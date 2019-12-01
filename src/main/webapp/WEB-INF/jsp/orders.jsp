@@ -62,9 +62,9 @@
                     <th>
                         <fmt:message key="content.myorders.table.to" bundle="${BundleContent}"></fmt:message>
                     </th>
-                    <th>
-                        <fmt:message key="content.myorders.table.luggage" bundle="${BundleContent}"></fmt:message>
-                    </th>
+<%--                    <th>--%>
+<%--                        <fmt:message key="content.myorders.table.luggage" bundle="${BundleContent}"></fmt:message>--%>
+<%--                    </th>--%>
                     <th>
                         <fmt:message key="content.myorders.table.price" bundle="${BundleContent}"></fmt:message>
                     </th>
@@ -86,16 +86,16 @@
                         <tr>
                             <td>
                                 <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                                value="${ticket.flight.departureDate}"/>
+                                                value="${ticket.flight.departure}"/>
                             </td>
                             <td>
                                 <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                                value="${ticket.flight.arrivalDate}"/>
+                                                value="${ticket.flight.arrival}"/>
                             </td>
-                            <td>${ticket.flight.fromPlace.name}</td>
-                            <td>${ticket.flight.toPlace.name}</td>
-                            <td>${ticket.luggage}</td>
-                            <td>${ticket.price}</td>
+                            <td>${ticket.flight.from_airport.name}</td>
+                            <td>${ticket.flight.to_airport.name}</td>
+<%--                            <td>${ticket.luggage}</td>--%>
+                            <td>${ticket.flight.price}</td>
                             <td>${ticket.confirmed}</td>
                             <td>
                                 <input type="submit" value="Cancel Order">
@@ -155,16 +155,16 @@
                             <tr>
                                 <td>
                                     <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                                    value="${ticket.flight.departureDate}"/>
+                                                    value="${ticket.flight.departure}"/>
                                 </td>
                                 <td>
                                     <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
-                                                    value="${ticket.flight.arrivalDate}"/>
+                                                    value="${ticket.flight.arrival}"/>
                                 </td>
-                                <td>${ticket.flight.fromPlace.name}</td>
-                                <td>${ticket.flight.toPlace.name}</td>
-                                <td>${ticket.luggage}</td>
-                                <td>${ticket.price}</td>
+                                <td>${ticket.flight.from_airport.name}</td>
+                                <td>${ticket.flight.to_airport.name}</td>
+<%--                                <td>${ticket.luggage}</td>--%>
+                                <td>${ticket.flight.price}</td>
                                 <td>${ticket.confirmed}</td>
                             </tr>
 

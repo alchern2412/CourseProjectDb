@@ -26,6 +26,7 @@ public class SqlTicketDAO implements TicketDAO {
 
     // services
     private static final String GET_BY_RANGE = "{call usp_ticketsSelectByRange(?, ?)}";
+    private static final String GET_BY_USER = "{call usp_ticketsSelectByUser(?)}";
 
 
     @Override
@@ -216,6 +217,44 @@ public class SqlTicketDAO implements TicketDAO {
             callableStatement = connection.prepareCall(GET_BY_RANGE);
             callableStatement.setInt(1, x1);
             callableStatement.setInt(2, x2);
+            boolean hadResults = callableStatement.execute();
+
+            if (hadResults) {
+                resultSet = callableStatement.getResultSet();
+                while (resultSet.next()) {
+                    Ticket ticket = new Ticket();
+                    ticket.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    ticket.setUser(DAOFactory.getInstance().getUserDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_TICKET_USER_ID)
+                    ));
+                    ticket.setFlight(DAOFactory.getInstance().getFlightDAO().get(
+                            resultSet.getInt(DbParameterName.REQ_TICKET_FLIGHT_ID)
+                    ));
+                    ticket.setConfirmed(resultSet.getBoolean(DbParameterName.REQ_TICKET_CONFIRMED));
+
+                    tickets.add(ticket);
+                }
+            }
+        } catch (SQLException | DAOException e) {
+            throw new TicketDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
+
+        return tickets;
+    }
+
+    @Override
+    public List<Ticket> getTicketsByUserId(int userId) throws TicketDAOException {
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(GET_BY_USER);
+            callableStatement.setInt(1, userId);
             boolean hadResults = callableStatement.execute();
 
             if (hadResults) {

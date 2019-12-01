@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface TicketDAO extends EntityDAO<Ticket> {
     List<Ticket> getByRange(int x1, int x2) throws TicketDAOException;
+
+    List<Ticket> getTicketsByUserId(int userId) throws TicketDAOException;
 }

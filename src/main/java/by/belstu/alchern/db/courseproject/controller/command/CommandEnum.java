@@ -4,6 +4,7 @@ import by.belstu.alchern.db.courseproject.controller.command.impl.*;
 import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllFlightsCommand;
 import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllTicketsCommand;
 import by.belstu.alchern.db.courseproject.controller.command.impl.admin.AllUsersCommand;
+import by.belstu.alchern.db.courseproject.controller.command.impl.user.UserOrdersCommand;
 
 public enum CommandEnum {
     LOGIN {
@@ -41,11 +42,11 @@ public enum CommandEnum {
 //            this.command = new RequestOrderCommand();
 //        }
 //    },
-//    USER_ORDERS {
-//        {
-//            this.command = new UserOrdersCommand();
-//        }
-//    },
+    USER_ORDERS {
+        {
+            this.command = new UserOrdersCommand();
+        }
+    },
 //    DELETE_ORDER {
 //        {
 //            this.command = new DeleteOrderCommand();
