@@ -166,7 +166,6 @@ public class SqlFlightDAO implements FlightDAO {
         try {
             callableStatement = connection.prepareCall(UPDATE);
             callableStatement.setInt(1, flight.getId());
-            callableStatement = connection.prepareCall(INSERT);
             callableStatement.setInt(2, flight.getFrom_airport().getId());
             callableStatement.setInt(3, flight.getTo_airport().getId());
             callableStatement.setInt(4, flight.getPlain().getId());

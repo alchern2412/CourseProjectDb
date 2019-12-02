@@ -77,4 +77,34 @@ public class FlightServiceImpl implements FlightService {
 
         return flight;
     }
+
+    @Override
+    public Flight get(int flightId) throws FlightServiceException {
+        try {
+            return DAOFactory.getInstance().getFlightDAO().get(flightId);
+        } catch (DAOException e) {
+            throw new FlightServiceException(e);
+        }
+    }
+
+    @Override
+    public Flight edit(Flight flight, FlightDTO flightDTO) throws FlightServiceException {
+        // Flight validation
+
+        DAOFactory factory = DAOFactory.getInstance();
+        try {
+            flight.setFrom_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getFromAirport())));
+            flight.setTo_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getToAirport())));
+            flight.setDeparture(new SimpleDateFormat(dateFormat).parse(flightDTO.getDeparture()));
+            flight.setArrival(new SimpleDateFormat(dateFormat).parse(flightDTO.getArrival()));
+            flight.setPlain(factory.getPlainDAO().get(Integer.parseInt(flightDTO.getPlain())));
+            flight.setPrice(Double.parseDouble(flightDTO.getPrice()));
+
+            DAOFactory.getInstance().getFlightDAO().update(flight);
+        } catch (DAOException | ParseException e) {
+            throw new FlightServiceException(e);
+        }
+
+        return flight;
+    }
 }

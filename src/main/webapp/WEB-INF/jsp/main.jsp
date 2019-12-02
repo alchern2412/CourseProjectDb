@@ -11,7 +11,7 @@
     <%@ include file="parts/meta.jsp" %>
     <link rel="stylesheet"
           href="https://www.jqueryscript.net/demo/Date-Time-Picker-Bootstrap-4/build/css/bootstrap-datetimepicker.min.css">
-    <title>Low Cost Aircompany</title>
+    <title>Aircompany</title>
 
 </head>
 <body>

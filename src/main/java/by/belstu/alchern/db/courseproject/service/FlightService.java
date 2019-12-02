@@ -13,4 +13,7 @@ public interface FlightService {
 
     Flight create(FlightDTO flightDTO) throws FlightServiceException;
 
+    Flight get(int flightId) throws FlightServiceException;
+
+    Flight edit(Flight flight, FlightDTO flightDTO) throws FlightServiceException;
 }
