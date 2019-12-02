@@ -2,15 +2,15 @@ package by.belstu.alchern.db.courseproject.model.impl;
 
 import by.belstu.alchern.db.courseproject.model.Entity;
 
-public class Plain extends Entity {
+public class Plane extends Entity {
     private String number;
     private String name;
     private int capacity;
 
-    public Plain() {
+    public Plane() {
     }
 
-    public Plain(int id, String number, String name, int capacity) {
+    public Plane(int id, String number, String name, int capacity) {
         super(id);
         this.number = number;
         this.name = name;
@@ -47,11 +47,11 @@ public class Plain extends Entity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        Plain plain = (Plain) o;
+        Plane plane = (Plane) o;
 
-        if (capacity != plain.capacity) return false;
-        if (!number.equals(plain.number)) return false;
-        return name.equals(plain.name);
+        if (capacity != plane.capacity) return false;
+        if (!number.equals(plane.number)) return false;
+        return name.equals(plane.name);
     }
 
     @Override

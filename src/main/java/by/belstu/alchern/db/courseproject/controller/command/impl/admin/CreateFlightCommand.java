@@ -5,16 +5,15 @@ import by.belstu.alchern.db.courseproject.controller.command.ActionCommand;
 import by.belstu.alchern.db.courseproject.controller.command.ConfigurationManager;
 import by.belstu.alchern.db.courseproject.controller.command.MessageManager;
 import by.belstu.alchern.db.courseproject.controller.command.exception.CommandException;
-import by.belstu.alchern.db.courseproject.dao.DAOFactory;
 import by.belstu.alchern.db.courseproject.model.impl.Airport;
 import by.belstu.alchern.db.courseproject.model.impl.Flight;
-import by.belstu.alchern.db.courseproject.model.impl.Plain;
+import by.belstu.alchern.db.courseproject.model.impl.Plane;
 import by.belstu.alchern.db.courseproject.model.impl.User;
 import by.belstu.alchern.db.courseproject.service.FlightService;
 import by.belstu.alchern.db.courseproject.service.ServiceProvider;
 import by.belstu.alchern.db.courseproject.service.exception.AirportServiceException;
 import by.belstu.alchern.db.courseproject.service.exception.FlightServiceException;
-import by.belstu.alchern.db.courseproject.service.exception.PlainServiceException;
+import by.belstu.alchern.db.courseproject.service.exception.PlaneServiceException;
 import by.belstu.alchern.db.courseproject.view.dto.FlightDTO;
 
 import javax.servlet.ServletException;
@@ -32,14 +31,14 @@ public class CreateFlightCommand implements ActionCommand {
         if (user.getRole().getRole().equals(RequestParameterName.USER_ROLE_ADMIN)) {
             if (request.getMethod().equals(RequestParameterName.METHOD_GET)) {
                 List<Airport> placesList = null;
-                List<Plain> plains = null;
+                List<Plane> planes = null;
                 try {
-                    plains = ServiceProvider.getInstance().getPlainService().getAll();
+                    planes = ServiceProvider.getInstance().getPlaneService().getAll();
                     placesList = ServiceProvider.getInstance().getAirportService().getAll();
-                } catch (AirportServiceException | PlainServiceException e) {
+                } catch (AirportServiceException | PlaneServiceException e) {
                     throw new CommandException(e);
                 }
-                request.setAttribute("allPlains", plains);
+                request.setAttribute("allPlanes", planes);
                 request.setAttribute("allPlaces", placesList);
 
                 page = ConfigurationManager.getProperty("path.page.createflight");
@@ -52,7 +51,7 @@ public class CreateFlightCommand implements ActionCommand {
                 flightDTO.setDeparture(request.getParameter(RequestParameterName.REQ_PARAM_DEPARTURE_DATE));
                 flightDTO.setArrival(request.getParameter(RequestParameterName.REQ_PARAM_ARRIVAL_DATE));
                 flightDTO.setPrice(request.getParameter(RequestParameterName.REQ_PARAM_PRICE_FLIGHT));
-                flightDTO.setPlain(request.getParameter(RequestParameterName.REQ_PARAM_PLAIN)); // add on jsp!!!
+                flightDTO.setPlane(request.getParameter(RequestParameterName.REQ_PARAM_PLAIN)); // add on jsp!!!
 
                 FlightService flightService = ServiceProvider.getInstance().getFlightService();
 

@@ -99,15 +99,15 @@
                 <%--                    <input type="number" step="0.01" class="form-control" name="price-luggage" placeholder="${placeholderPriceLuggage}">--%>
                 <%--                </div>--%>
                 <div class="col">
-                    <!-- Plain -->
-                    <select name="plain" class="form-control" aria-describedby="plainHelpBlock">
-                        <c:forEach var="plain" items="${allPlains}">
-                            <option value="${plain.id}"><c:out value="${plain.number} - ${plain.name}"/></option>
+                    <!-- Plane -->
+                    <select name="plane" class="form-control" aria-describedby="planeHelpBlock">
+                        <c:forEach var="plane" items="${allPlanes}">
+                            <option value="${plane.id}"><c:out value="${plane.number} - ${plane.name}"/></option>
                         </c:forEach>
                     </select>
 
-                    <small id="plainHelpBlock" class="form-text text-muted mb-4">
-                        <fmt:message key="content.createflight.label.plain" bundle="${BundleContent}"/>
+                    <small id="planeHelpBlock" class="form-text text-muted mb-4">
+                        <fmt:message key="content.createflight.label.plane" bundle="${BundleContent}"/>
                     </small>
                 </div>
             </div>

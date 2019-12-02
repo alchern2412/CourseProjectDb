@@ -47,7 +47,7 @@
                     <fmt:message key="content.allflights.table.priceflight" bundle="${BundleContent}"></fmt:message>
                 </th>
                 <th>
-                    <fmt:message key="content.allflights.table.plain" bundle="${BundleContent}"></fmt:message>
+                    <fmt:message key="content.allflights.table.plane" bundle="${BundleContent}"></fmt:message>
                 </th>
 <%--                <th>--%>
 <%--                    <fmt:message key="content.allflights.table.description" bundle="${BundleContent}"></fmt:message>--%>
@@ -79,11 +79,11 @@
                             <fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"
                                             value="${curFlight.arrival}"/>
                         </td>
-                        <td>${curFlight.plain.capacity}</td>
+                        <td>${curFlight.plane.capacity}</td>
 <%--                        <td>${curFlight.passengers}</td>--%>
                         <td>???</td>
                         <td>${curFlight.price}</td>
-                        <td>${curFlight.plain.number}</td>
+                        <td>${curFlight.plane.number}</td>
 <%--                        <td>${curFlight.description}</td>--%>
                         <td>
                             <a class="dropdown-item" onclick="document.getElementById('formFlightUsers${curFlight.id}').submit()" href="#">

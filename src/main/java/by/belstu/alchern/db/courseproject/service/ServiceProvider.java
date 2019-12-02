@@ -16,7 +16,7 @@ public class ServiceProvider {
     private final AirportService airportService = new AirportServiceImpl();
     private final CountryService countryService = new CountryServiceImpl();
     private final FlightService flightService = new FlightServiceImpl();
-    private final PlainService plainService = new PlainServiceImpl();
+    private final PlaneService planeService = new PlaneServiceImpl();
     private final PlainStuffService plainStuffService = new PlainStuffServiceImpl();
     private final PositionService positionService = new PositionServiceImpl();
     private final RoleService roleService = new RoleServiceImpl();
@@ -39,8 +39,8 @@ public class ServiceProvider {
         return flightService;
     }
 
-    public PlainService getPlainService() {
-        return plainService;
+    public PlaneService getPlaneService() {
+        return planeService;
     }
 
     public PlainStuffService getPlainStuffService() {

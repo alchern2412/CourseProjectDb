@@ -3,15 +3,15 @@ package by.belstu.alchern.db.courseproject.view.dto;
 public class FlightDTO {
     String fromAirport;
     String toAirport;
-    String plain;
+    String plane;
     String departure;
     String arrival;
     String price;
 
-    public FlightDTO(String fromAirport, String toAirport, String plain, String departure, String arrival, String price) {
+    public FlightDTO(String fromAirport, String toAirport, String plane, String departure, String arrival, String price) {
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
-        this.plain = plain;
+        this.plane = plane;
         this.departure = departure;
         this.arrival = arrival;
         this.price = price;
@@ -36,12 +36,12 @@ public class FlightDTO {
         this.toAirport = toAirport;
     }
 
-    public String getPlain() {
-        return plain;
+    public String getPlane() {
+        return plane;
     }
 
-    public void setPlain(String plain) {
-        this.plain = plain;
+    public void setPlane(String plane) {
+        this.plane = plane;
     }
 
     public String getDeparture() {

@@ -7,13 +7,13 @@ import by.belstu.alchern.db.courseproject.controller.command.MessageManager;
 import by.belstu.alchern.db.courseproject.controller.command.exception.CommandException;
 import by.belstu.alchern.db.courseproject.model.impl.Airport;
 import by.belstu.alchern.db.courseproject.model.impl.Flight;
-import by.belstu.alchern.db.courseproject.model.impl.Plain;
+import by.belstu.alchern.db.courseproject.model.impl.Plane;
 import by.belstu.alchern.db.courseproject.model.impl.User;
 import by.belstu.alchern.db.courseproject.service.FlightService;
 import by.belstu.alchern.db.courseproject.service.ServiceProvider;
 import by.belstu.alchern.db.courseproject.service.exception.AirportServiceException;
 import by.belstu.alchern.db.courseproject.service.exception.FlightServiceException;
-import by.belstu.alchern.db.courseproject.service.exception.PlainServiceException;
+import by.belstu.alchern.db.courseproject.service.exception.PlaneServiceException;
 import by.belstu.alchern.db.courseproject.view.dto.FlightDTO;
 import org.apache.log4j.Logger;
 
@@ -35,14 +35,14 @@ public class EditFlightCommand implements ActionCommand {
             Flight flight = null;
             if (request.getMethod().equals(RequestParameterName.METHOD_GET)) {
                 List<Airport> placesList = null;
-                List<Plain> plains = null;
+                List<Plane> planes = null;
                 try {
-                    plains = ServiceProvider.getInstance().getPlainService().getAll();
+                    planes = ServiceProvider.getInstance().getPlaneService().getAll();
                     placesList = ServiceProvider.getInstance().getAirportService().getAll();
-                } catch (AirportServiceException | PlainServiceException e) {
+                } catch (AirportServiceException | PlaneServiceException e) {
                     throw new CommandException(e);
                 }
-                request.setAttribute("allPlains", plains);
+                request.setAttribute("allPlanes", planes);
                 request.setAttribute("allPlaces", placesList);
 
                 int flightId = Integer.parseInt(request.getParameter(RequestParameterName.REQ_PARAM_FLIGHT_ID));
@@ -62,7 +62,7 @@ public class EditFlightCommand implements ActionCommand {
                 String departureDate = request.getParameter(RequestParameterName.REQ_PARAM_DEPARTURE_DATE);
                 String arrivalDate = request.getParameter(RequestParameterName.REQ_PARAM_ARRIVAL_DATE);
                 String priceFlight = request.getParameter(RequestParameterName.REQ_PARAM_PRICE_FLIGHT);
-                String plain = request.getParameter(RequestParameterName.REQ_PARAM_PLAIN);
+                String plane = request.getParameter(RequestParameterName.REQ_PARAM_PLAIN);
 
                 int flightId = Integer.parseInt(request.getParameter(RequestParameterName.REQ_PARAM_FLIGHT_ID));
                 try {
@@ -77,7 +77,7 @@ public class EditFlightCommand implements ActionCommand {
                 flightDTO.setFromAirport(fromPlace);
                 flightDTO.setToAirport(toPlace);
                 flightDTO.setPrice(priceFlight);
-                flightDTO.setPlain(plain);
+                flightDTO.setPlane(plane);
 
                 FlightService flightService = ServiceProvider.getInstance().getFlightService();
 

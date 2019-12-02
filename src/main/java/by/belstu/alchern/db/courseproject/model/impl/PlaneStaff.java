@@ -2,25 +2,25 @@ package by.belstu.alchern.db.courseproject.model.impl;
 
 import by.belstu.alchern.db.courseproject.model.Entity;
 
-public class PlainStaff extends Entity {
-    private Plain plain;
+public class PlaneStaff extends Entity {
+    private Plane plane;
     private Worker worker;
 
-    public PlainStaff() {
+    public PlaneStaff() {
     }
 
-    public PlainStaff(int id, Plain plain, Worker worker) {
+    public PlaneStaff(int id, Plane plane, Worker worker) {
         super(id);
-        this.plain = plain;
+        this.plane = plane;
         this.worker = worker;
     }
 
-    public Plain getPlain() {
-        return plain;
+    public Plane getPlane() {
+        return plane;
     }
 
-    public void setPlain(Plain plain) {
-        this.plain = plain;
+    public void setPlane(Plane plane) {
+        this.plane = plane;
     }
 
     public Worker getWorker() {
@@ -37,16 +37,16 @@ public class PlainStaff extends Entity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        PlainStaff that = (PlainStaff) o;
+        PlaneStaff that = (PlaneStaff) o;
 
-        if (!plain.equals(that.plain)) return false;
+        if (!plane.equals(that.plane)) return false;
         return worker.equals(that.worker);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + plain.hashCode();
+        result = 31 * result + plane.hashCode();
         result = 31 * result + worker.hashCode();
         return result;
     }

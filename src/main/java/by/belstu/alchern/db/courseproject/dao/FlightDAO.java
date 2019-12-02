@@ -9,4 +9,20 @@ public interface FlightDAO extends EntityDAO<Flight> {
     List<Flight> getByRange(int x1, int x2) throws FlightDAOException;
 
     List<Flight> getFlightByRequest(Flight flight) throws FlightDAOException;
+
+    List<Flight> getOnTheWay() throws FlightDAOException;
+
+    List<Flight> getDeparting() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByPlane() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByArrival() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByDeparture() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByFromAirport() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByToAirport() throws FlightDAOException;
+
+    List<Flight> getOnTheWayOrderByWillArrive() throws FlightDAOException;
 }

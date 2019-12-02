@@ -115,20 +115,20 @@
                            name="price-flight" placeholder="${placeholderPriceFlight}">
                 </div>
                 <div class="col">
-                    <!-- Plain -->
-                    <select name="plain" class="form-control" aria-describedby="plainHelpBlock">
-                        <c:forEach var="plain" items="${allPlains}">
-                            <c:if test="${plain.id eq flight.plain.id}">
-                                <option selected value="${plain.id}"><c:out value="${plain.number} - ${plain.name}"/></option>
+                    <!-- Plane -->
+                    <select name="plane" class="form-control" aria-describedby="planeHelpBlock">
+                        <c:forEach var="plane" items="${allPlanes}">
+                            <c:if test="${plane.id eq flight.plane.id}">
+                                <option selected value="${plane.id}"><c:out value="${plane.number} - ${plane.name}"/></option>
                             </c:if>
-                            <c:if test="${plain.id ne flight.plain.id}">
-                                <option value="${plain.id}"><c:out value="${plain.number} - ${plain.name}"/></option>
+                            <c:if test="${plane.id ne flight.plane.id}">
+                                <option value="${plane.id}"><c:out value="${plane.number} - ${plane.name}"/></option>
                             </c:if>
                         </c:forEach>
                     </select>
 
-                    <small id="plainHelpBlock" class="form-text text-muted mb-4">
-                        <fmt:message key="content.createflight.label.plain" bundle="${BundleContent}"/>
+                    <small id="planeHelpBlock" class="form-text text-muted mb-4">
+                        <fmt:message key="content.createflight.label.plane" bundle="${BundleContent}"/>
                     </small>
                 </div>
             </div>

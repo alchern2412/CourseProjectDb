@@ -9,8 +9,8 @@ public class DAOFactory {
     private final AirportDAO airportDAO = new SqlAirportDAO();
     private final CountryDAO countryDAO = new SqlCountryDAO();
     private final FlightDAO flightDAO = new SqlFlightDAO();
-    private final PlainDAO plainDAO = new SqlPlainDAO();
-    private final PlainStuffDAO plainStuffDAO = new SqlPlainStaffDAO();
+    private final PlaneDAO planeDAO = new SqlPlaneDAO();
+    private final PlaneStuffDAO planeStuffDAO = new SqlPlaneStaffDAO();
     private final PositionDAO positionDAO = new SqlPositionDAO();
     private final RoleDAO roleDAO = new SqlRoleDAO();
     private final TicketDAO ticketDAO = new SqlTicketDAO();
@@ -39,12 +39,12 @@ public class DAOFactory {
         return flightDAO;
     }
 
-    public PlainDAO getPlainDAO() {
-        return plainDAO;
+    public PlaneDAO getPlaneDAO() {
+        return planeDAO;
     }
 
-    public PlainStuffDAO getPlainStuffDAO() {
-        return plainStuffDAO;
+    public PlaneStuffDAO getPlaneStuffDAO() {
+        return planeStuffDAO;
     }
 
     public PositionDAO getPositionDAO() {

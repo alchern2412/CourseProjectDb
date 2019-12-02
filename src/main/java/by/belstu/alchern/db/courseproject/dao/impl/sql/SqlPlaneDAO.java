@@ -1,11 +1,10 @@
 package by.belstu.alchern.db.courseproject.dao.impl.sql;
 
-import by.belstu.alchern.db.courseproject.dao.PlainDAO;
-import by.belstu.alchern.db.courseproject.dao.exception.impl.PlainDAOException;
+import by.belstu.alchern.db.courseproject.dao.PlaneDAO;
+import by.belstu.alchern.db.courseproject.dao.exception.impl.PlaneDAOException;
 import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.ConnectionPool;
-import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.DbParameter;
 import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.DbParameterName;
-import by.belstu.alchern.db.courseproject.model.impl.Plain;
+import by.belstu.alchern.db.courseproject.model.impl.Plane;
 import org.apache.log4j.Logger;
 
 import java.sql.CallableStatement;
@@ -15,18 +14,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqlPlainDAO implements PlainDAO {
-    private static final Logger LOGGER = Logger.getLogger(SqlPlainDAO.class.getSimpleName());
+public class SqlPlaneDAO implements PlaneDAO {
+    private static final Logger LOGGER = Logger.getLogger(SqlPlaneDAO.class.getSimpleName());
 
-    private static final String GET = "{call usp_plainsSelect(?)}";
-    private static final String GET_ALL = "{call usp_plainsSelect(null)}";
-    private static final String INSERT = "{call usp_plainsInsert(?, ?, ?)}";
-    private static final String UPDATE = "{call usp_plainsUpdate(?, ?, ?, ?)}";
-    private static final String DELETE = "{call usp_plainsDelete(?)}";
+    private static final String GET = "{call usp_planesSelect(?)}";
+    private static final String GET_ALL = "{call usp_planesSelect(null)}";
+    private static final String INSERT = "{call usp_planesInsert(?, ?, ?)}";
+    private static final String UPDATE = "{call usp_planesUpdate(?, ?, ?, ?)}";
+    private static final String DELETE = "{call usp_planesDelete(?)}";
 
     @Override
-    public Plain get(int id) throws PlainDAOException {
-        Plain plain = null;
+    public Plane get(int id) throws PlaneDAOException {
+        Plane plane = null;
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
@@ -38,27 +37,27 @@ public class SqlPlainDAO implements PlainDAO {
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plain = new Plain();
-                    plain.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plain.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
-                    plain.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
-                    plain.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
+                    plane = new Plane();
+                    plane.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    plane.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
+                    plane.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
+                    plane.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
                 }
             }
         } catch (SQLException e) {
-            throw new PlainDAOException(e);
+            throw new PlaneDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
             SqlDAO.putBackConnection(connection);
         }
 
-        return plain;
+        return plane;
     }
 
     @Override
-    public List<Plain> getAll() throws PlainDAOException {
-        List<Plain> plains = new ArrayList<Plain>();
+    public List<Plane> getAll() throws PlaneDAOException {
+        List<Plane> planes = new ArrayList<Plane>();
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
@@ -69,48 +68,48 @@ public class SqlPlainDAO implements PlainDAO {
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 while (resultSet.next()) {
-                    Plain plain = new Plain();
-                    plain.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plain.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
-                    plain.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
-                    plain.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
-                    plains.add(plain);
+                    Plane plane = new Plane();
+                    plane.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    plane.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
+                    plane.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
+                    plane.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
+                    planes.add(plane);
                 }
             }
         } catch (SQLException e) {
-            throw new PlainDAOException(e);
+            throw new PlaneDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
             SqlDAO.putBackConnection(connection);
         }
 
-        return plains;
+        return planes;
     }
 
     @Override
-    public void insert(Plain plain) throws PlainDAOException {
+    public void insert(Plane plane) throws PlaneDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(INSERT);
-            callableStatement.setString(1, plain.getNumber());
-            callableStatement.setString(2, plain.getName());
-            callableStatement.setInt(3, plain.getCapacity());
+            callableStatement.setString(1, plane.getNumber());
+            callableStatement.setString(2, plane.getName());
+            callableStatement.setInt(3, plane.getCapacity());
             boolean hadResults = callableStatement.execute();
 
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plain.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plain.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
-                    plain.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
-                    plain.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
+                    plane.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    plane.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
+                    plane.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
+                    plane.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
                 }
             }
         } catch (SQLException e) {
-            throw new PlainDAOException(e);
+            throw new PlaneDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
@@ -119,29 +118,29 @@ public class SqlPlainDAO implements PlainDAO {
     }
 
     @Override
-    public void update(Plain plain) throws PlainDAOException {
+    public void update(Plane plane) throws PlaneDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(UPDATE);
-            callableStatement.setInt(1, plain.getId());
-            callableStatement.setString(2, plain.getNumber());
-            callableStatement.setString(3, plain.getName());
-            callableStatement.setInt(4, plain.getCapacity());
+            callableStatement.setInt(1, plane.getId());
+            callableStatement.setString(2, plane.getNumber());
+            callableStatement.setString(3, plane.getName());
+            callableStatement.setInt(4, plane.getCapacity());
             boolean hadResults = callableStatement.execute();
 
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plain.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plain.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
-                    plain.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
-                    plain.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
+                    plane.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    plane.setNumber(resultSet.getString(DbParameterName.REQ_PLAIN_NUMBER));
+                    plane.setName(resultSet.getString(DbParameterName.REQ_PLAIN_NAME));
+                    plane.setCapacity(resultSet.getInt(DbParameterName.REQ_PLAIN_CAPACITY));
                 }
             }
         } catch (SQLException e) {
-            throw new PlainDAOException(e);
+            throw new PlaneDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
@@ -150,17 +149,17 @@ public class SqlPlainDAO implements PlainDAO {
     }
 
     @Override
-    public void delete(Plain plain) throws PlainDAOException {
+    public void delete(Plane plane) throws PlaneDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(DELETE);
-            callableStatement.setInt(1, plain.getId());
+            callableStatement.setInt(1, plane.getId());
             callableStatement.execute();
 
         } catch (SQLException e) {
-            throw new PlainDAOException(e);
+            throw new PlaneDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);

@@ -58,17 +58,11 @@
                                          bundle="${BundleContent}"></fmt:message>
                         </a>
                     </li>
-
-                    <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            Admin dropdown link
+                        <%--                    Unregister--%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller?command=track-flights">
+                            <fmt:message key="content.header.navitem.trackflights" bundle="${BundleContent}"></fmt:message>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Admin Link 1</a>
-                            <a class="dropdown-item" href="#">Admin Link 2</a>
-                            <a class="dropdown-item" href="#">Adnub Link 3</a>
-                        </div>
                     </li>
                 </ul>
             </c:when>
@@ -78,40 +72,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/controller?command=user-orders">My Orders</a>
                     </li>
-
-                    <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            User dropdown link
+<%--                    Unregister--%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller?command=track-flights">
+                            <fmt:message key="content.header.navitem.trackflights" bundle="${BundleContent}"></fmt:message>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">User Link 1</a>
-                            <a class="dropdown-item" href="#">User Link 2</a>
-                            <a class="dropdown-item" href="#">User Link 3</a>
-                        </div>
                     </li>
                 </ul>
             </c:when>
-            <c:otherwise>
-                <!--Unregister Links -->
+            <c:when test="${sessionScope.user eq null}">
                 <ul class="navbar-nav">
+                        <%--                    Unregister--%>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Unregister link a</a>
-                    </li>
-
-                    <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            unregister dropdown link
+                        <a class="nav-link" href="/controller?command=track-flights&order=plane">
+                            <fmt:message key="content.header.navitem.trackflights" bundle="${BundleContent}"></fmt:message>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Unregister Link 1</a>
-                            <a class="dropdown-item" href="#">Unregister Link 2</a>
-                            <a class="dropdown-item" href="#">Unregister Link 3</a>
-                        </div>
                     </li>
                 </ul>
-            </c:otherwise>
+            </c:when>
         </c:choose>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -132,7 +110,8 @@
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <a class="nav-link navbar-toggler-right" href="/controller?command=edit-profile">${user.login}</a>
+                        <a class="nav-link navbar-toggler-right"
+                           href="/controller?command=edit-profile">${user.login}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="controller?command=logout">

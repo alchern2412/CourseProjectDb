@@ -51,6 +51,9 @@ public class RequestParameterName {
     public static final String REQ_PARAM_TICKET_ID = "id-ticket";
     public static final String REQ_ATTR_ALL_PLACES = "allPlaces";
     public static final String REQ_PARAM_PLAIN = "plain";
+    public static final String REQ_ATTR_PLANES_ON_THE_WAY = "planesOnTheWay";
+    public static final String REQ_ATTR_PLANES_DEPARTING = "departingPlanes";
+    public static final String REQ_PARAM_ORDER = "order";
 
 //    public static final String REQ_ATTR_USERS = "users";
 //    public static final String REQ_ATTR_USERS = "users";

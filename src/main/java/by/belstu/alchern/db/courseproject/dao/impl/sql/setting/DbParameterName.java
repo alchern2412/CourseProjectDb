@@ -15,7 +15,7 @@ public class DbParameterName {
     // ДОБАВИТЬ ДАТУ ПРИЛЕТА-ОТЛЕТА
     public static final String REQ_FLIGHT_FROM_AIRPORT_ID = "from_airport_id";
     public static final String REQ_FLIGHT_TO_AIRPORT_ID = "to_airport_id";
-    public static final String REQ_FLIGHT_PLAIN_ID = "plain_id";
+    public static final String REQ_FLIGHT_PLAIN_ID = "plane_id";
     public static final String REQ_FLIGHT_DEPARTURE_DATE = "departure";
     public static final String REQ_FLIGHT_ARRIVAL_DATE = "arrival";
     public static final String REQ_FLIGHT_PASSENGERS_ALL = "passengers_all";
@@ -43,7 +43,7 @@ public class DbParameterName {
     public static final String REQ_PLAIN_NAME = "name";
     public static final String REQ_PLAIN_CAPACITY = "capacity";
 
-    public static final String REQ_PLAIN_STAFF_PLAIN_ID = "plain_id";
+    public static final String REQ_PLAIN_STAFF_PLAIN_ID = "plane_id";
     public static final String REQ_PLAIN_STAFF_WORKER_ID = "worker_id";
 
     public static final String REQ_WORKER_FIRST_NAME = "first_name";

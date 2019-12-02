@@ -1,12 +1,12 @@
 package by.belstu.alchern.db.courseproject.dao.impl.sql;
 
 import by.belstu.alchern.db.courseproject.dao.DAOFactory;
-import by.belstu.alchern.db.courseproject.dao.PlainStuffDAO;
+import by.belstu.alchern.db.courseproject.dao.PlaneStuffDAO;
 import by.belstu.alchern.db.courseproject.dao.exception.DAOException;
-import by.belstu.alchern.db.courseproject.dao.exception.impl.PlainStaffDAOException;
+import by.belstu.alchern.db.courseproject.dao.exception.impl.PlaneStaffDAOException;
 import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.ConnectionPool;
 import by.belstu.alchern.db.courseproject.dao.impl.sql.setting.DbParameterName;
-import by.belstu.alchern.db.courseproject.model.impl.PlainStaff;
+import by.belstu.alchern.db.courseproject.model.impl.PlaneStaff;
 import org.apache.log4j.Logger;
 
 import java.sql.CallableStatement;
@@ -16,18 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqlPlainStaffDAO implements PlainStuffDAO {
-    private static final Logger LOGGER = Logger.getLogger(SqlPlainStaffDAO.class.getSimpleName());
+public class SqlPlaneStaffDAO implements PlaneStuffDAO {
+    private static final Logger LOGGER = Logger.getLogger(SqlPlaneStaffDAO.class.getSimpleName());
 
-    private static final String GET = "{call usp_plain_StaffSelect(?)}";
-    private static final String GET_ALL = "{call usp_plain_StaffSelect(null)}";
-    private static final String INSERT = "{call usp_plain_StaffInsert(?, ?)}";
-    private static final String UPDATE = "{call usp_plain_StaffUpdate(?, ?, ?)} ";
-    private static final String DELETE = "{call usp_plain_StaffDelete(?)}";
+    private static final String GET = "{call usp_plane_StaffSelect(?)}";
+    private static final String GET_ALL = "{call usp_plane_StaffSelect(null)}";
+    private static final String INSERT = "{call usp_plane_StaffInsert(?, ?)}";
+    private static final String UPDATE = "{call usp_plane_StaffUpdate(?, ?, ?)} ";
+    private static final String DELETE = "{call usp_plane_StaffDelete(?)}";
 
     @Override
-    public PlainStaff get(int id) throws PlainStaffDAOException {
-        PlainStaff plainStaff = null;
+    public PlaneStaff get(int id) throws PlaneStaffDAOException {
+        PlaneStaff planeStaff = null;
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
@@ -39,27 +39,27 @@ public class SqlPlainStaffDAO implements PlainStuffDAO {
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plainStaff = new PlainStaff();
-                    plainStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plainStaff.setPlain(DAOFactory.getInstance().getPlainDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
-                    plainStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
+                    planeStaff = new PlaneStaff();
+                    planeStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    planeStaff.setPlane(DAOFactory.getInstance().getPlaneDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
+                    planeStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
 
                 }
             }
         } catch (SQLException | DAOException e) {
-            throw new PlainStaffDAOException(e);
+            throw new PlaneStaffDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
             SqlDAO.putBackConnection(connection);
         }
 
-        return plainStaff;
+        return planeStaff;
     }
 
     @Override
-    public List<PlainStaff> getAll() throws PlainStaffDAOException {
-        List<PlainStaff> plainStaffList = new ArrayList<PlainStaff>();
+    public List<PlaneStaff> getAll() throws PlaneStaffDAOException {
+        List<PlaneStaff> planeStaffList = new ArrayList<PlaneStaff>();
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
@@ -70,46 +70,46 @@ public class SqlPlainStaffDAO implements PlainStuffDAO {
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 while (resultSet.next()) {
-                    PlainStaff plainStaff = new PlainStaff();
-                    plainStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plainStaff.setPlain(DAOFactory.getInstance().getPlainDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
-                    plainStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
-                    plainStaffList.add(plainStaff);
+                    PlaneStaff planeStaff = new PlaneStaff();
+                    planeStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    planeStaff.setPlane(DAOFactory.getInstance().getPlaneDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
+                    planeStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
+                    planeStaffList.add(planeStaff);
                 }
             }
         } catch (SQLException | DAOException e) {
-            throw new PlainStaffDAOException(e);
+            throw new PlaneStaffDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
             SqlDAO.putBackConnection(connection);
         }
 
-        return plainStaffList;
+        return planeStaffList;
     }
 
     @Override
-    public void insert(PlainStaff plainStaff) throws PlainStaffDAOException {
+    public void insert(PlaneStaff planeStaff) throws PlaneStaffDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(INSERT);
-            callableStatement.setInt(1, plainStaff.getPlain().getId());
-            callableStatement.setInt(2, plainStaff.getWorker().getId());
+            callableStatement.setInt(1, planeStaff.getPlane().getId());
+            callableStatement.setInt(2, planeStaff.getWorker().getId());
 
             boolean hadResults = callableStatement.execute();
 
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plainStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plainStaff.setPlain(DAOFactory.getInstance().getPlainDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
-                    plainStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
+                    planeStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    planeStaff.setPlane(DAOFactory.getInstance().getPlaneDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
+                    planeStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
                 }
             }
         } catch (SQLException | DAOException e) {
-            throw new PlainStaffDAOException(e);
+            throw new PlaneStaffDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
@@ -118,28 +118,28 @@ public class SqlPlainStaffDAO implements PlainStuffDAO {
     }
 
     @Override
-    public void update(PlainStaff plainStaff) throws PlainStaffDAOException {
+    public void update(PlaneStaff planeStaff) throws PlaneStaffDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(UPDATE);
-            callableStatement.setInt(1, plainStaff.getId());
-            callableStatement.setInt(2, plainStaff.getPlain().getId());
-            callableStatement.setInt(3, plainStaff.getWorker().getId());
+            callableStatement.setInt(1, planeStaff.getId());
+            callableStatement.setInt(2, planeStaff.getPlane().getId());
+            callableStatement.setInt(3, planeStaff.getWorker().getId());
 
             boolean hadResults = callableStatement.execute();
 
             if (hadResults) {
                 resultSet = callableStatement.getResultSet();
                 if (resultSet.next()) {
-                    plainStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
-                    plainStaff.setPlain(DAOFactory.getInstance().getPlainDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
-                    plainStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
+                    planeStaff.setId(resultSet.getInt(DbParameterName.REQ_ID));
+                    planeStaff.setPlane(DAOFactory.getInstance().getPlaneDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_PLAIN_ID)));
+                    planeStaff.setWorker(DAOFactory.getInstance().getWorkerDAO().get(resultSet.getInt(DbParameterName.REQ_PLAIN_STAFF_WORKER_ID)));
                 }
             }
         } catch (SQLException | DAOException e) {
-            throw new PlainStaffDAOException(e);
+            throw new PlaneStaffDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);
@@ -148,17 +148,17 @@ public class SqlPlainStaffDAO implements PlainStuffDAO {
     }
 
     @Override
-    public void delete(PlainStaff plainStaff) throws PlainStaffDAOException {
+    public void delete(PlaneStaff planeStaff) throws PlaneStaffDAOException {
         Connection connection = ConnectionPool.getInstance().takeConnection();
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         try {
             callableStatement = connection.prepareCall(DELETE);
-            callableStatement.setInt(1, plainStaff.getId());
+            callableStatement.setInt(1, planeStaff.getId());
             callableStatement.execute();
 
         } catch (SQLException e) {
-            throw new PlainStaffDAOException(e);
+            throw new PlaneStaffDAOException(e);
         } finally {
             SqlDAO.closeResultSet(resultSet);
             SqlDAO.closeCallableStatement(callableStatement);

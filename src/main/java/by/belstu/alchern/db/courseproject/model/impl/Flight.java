@@ -7,7 +7,7 @@ import java.util.Date;
 public class Flight extends Entity {
     Airport from_airport;
     Airport to_airport;
-    Plain plain;
+    Plane plane;
     Date departure;
     Date arrival;
     double price;
@@ -15,11 +15,11 @@ public class Flight extends Entity {
     public Flight() {
     }
 
-    public Flight(int id, Airport from_airport, Airport to_airport, Plain plain, Date departure, Date arrival, double price) {
+    public Flight(int id, Airport from_airport, Airport to_airport, Plane plane, Date departure, Date arrival, double price) {
         super(id);
         this.from_airport = from_airport;
         this.to_airport = to_airport;
-        this.plain = plain;
+        this.plane = plane;
         this.departure = departure;
         this.arrival = arrival;
         this.price = price;
@@ -41,12 +41,12 @@ public class Flight extends Entity {
         this.to_airport = to_airport;
     }
 
-    public Plain getPlain() {
-        return plain;
+    public Plane getPlane() {
+        return plane;
     }
 
-    public void setPlain(Plain plain) {
-        this.plain = plain;
+    public void setPlane(Plane plane) {
+        this.plane = plane;
     }
 
     public Date getDeparture() {
@@ -85,7 +85,7 @@ public class Flight extends Entity {
         if (from_airport != null ? !from_airport.equals(flight.from_airport) : flight.from_airport != null)
             return false;
         if (to_airport != null ? !to_airport.equals(flight.to_airport) : flight.to_airport != null) return false;
-        if (plain != null ? !plain.equals(flight.plain) : flight.plain != null) return false;
+        if (plane != null ? !plane.equals(flight.plane) : flight.plane != null) return false;
         if (departure != null ? !departure.equals(flight.departure) : flight.departure != null) return false;
         return arrival != null ? arrival.equals(flight.arrival) : flight.arrival == null;
     }
@@ -96,7 +96,7 @@ public class Flight extends Entity {
         long temp;
         result = 31 * result + (from_airport != null ? from_airport.hashCode() : 0);
         result = 31 * result + (to_airport != null ? to_airport.hashCode() : 0);
-        result = 31 * result + (plain != null ? plain.hashCode() : 0);
+        result = 31 * result + (plane != null ? plane.hashCode() : 0);
         result = 31 * result + (departure != null ? departure.hashCode() : 0);
         result = 31 * result + (arrival != null ? arrival.hashCode() : 0);
         temp = Double.doubleToLongBits(price);

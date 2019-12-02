@@ -81,6 +81,11 @@ public enum CommandEnum {
         {
             this.command = new ConfirmTicketCommand();
         }
+    },
+    TRACK_FLIGHTS {
+        {
+            this.command = new TrackFlightCommand();
+        }
     }
     ;
     ActionCommand command;

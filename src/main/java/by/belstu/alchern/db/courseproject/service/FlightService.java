@@ -16,4 +16,10 @@ public interface FlightService {
     Flight get(int flightId) throws FlightServiceException;
 
     Flight edit(Flight flight, FlightDTO flightDTO) throws FlightServiceException;
+
+    List<Flight> getAll() throws FlightServiceException;
+
+    List<Flight> getOnTheWay(String orderBy) throws FlightServiceException;
+
+    List<Flight> getDeparting() throws FlightServiceException;
 }

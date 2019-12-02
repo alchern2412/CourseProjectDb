@@ -1,8 +1,8 @@
 package by.belstu.alchern.db.courseproject.service.impl;
 
 import by.belstu.alchern.db.courseproject.dao.DAOFactory;
+import by.belstu.alchern.db.courseproject.dao.FlightDAO;
 import by.belstu.alchern.db.courseproject.dao.exception.DAOException;
-import by.belstu.alchern.db.courseproject.dao.exception.impl.AirportDAOException;
 import by.belstu.alchern.db.courseproject.dao.exception.impl.FlightDAOException;
 import by.belstu.alchern.db.courseproject.model.impl.Flight;
 import by.belstu.alchern.db.courseproject.service.FlightService;
@@ -68,7 +68,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setTo_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getToAirport())));
             flight.setDeparture(new SimpleDateFormat(dateFormat).parse(flightDTO.getDeparture()));
             flight.setArrival(new SimpleDateFormat(dateFormat).parse(flightDTO.getArrival()));
-            flight.setPlain(factory.getPlainDAO().get(Integer.parseInt(flightDTO.getPlain())));
+            flight.setPlane(factory.getPlaneDAO().get(Integer.parseInt(flightDTO.getPlane())));
             flight.setPrice(Double.parseDouble(flightDTO.getPrice()));
             DAOFactory.getInstance().getFlightDAO().insert(flight);
         } catch (DAOException | ParseException e) {
@@ -97,7 +97,7 @@ public class FlightServiceImpl implements FlightService {
             flight.setTo_airport(factory.getAirportDAO().get(Integer.parseInt(flightDTO.getToAirport())));
             flight.setDeparture(new SimpleDateFormat(dateFormat).parse(flightDTO.getDeparture()));
             flight.setArrival(new SimpleDateFormat(dateFormat).parse(flightDTO.getArrival()));
-            flight.setPlain(factory.getPlainDAO().get(Integer.parseInt(flightDTO.getPlain())));
+            flight.setPlane(factory.getPlaneDAO().get(Integer.parseInt(flightDTO.getPlane())));
             flight.setPrice(Double.parseDouble(flightDTO.getPrice()));
 
             DAOFactory.getInstance().getFlightDAO().update(flight);
@@ -106,5 +106,63 @@ public class FlightServiceImpl implements FlightService {
         }
 
         return flight;
+    }
+
+    @Override
+    public List<Flight> getAll() throws FlightServiceException {
+        try {
+            return DAOFactory.getInstance().getFlightDAO().getAll();
+        } catch (DAOException e) {
+            throw new FlightServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Flight> getOnTheWay(String orderBy) throws FlightServiceException {
+        final String PLANE = "plane";
+        final String ARRIVAL = "arrival";
+        final String DEPARTURE = "departure";
+        final String FROM_AIRPORT = "from-airport";
+        final String TO_AIRPORT = "to-airport";
+        final String WILL_ARRIVE = "will-arrive";
+
+        List<Flight> flights = null;
+
+        try {
+            FlightDAO flightDAO = DAOFactory.getInstance().getFlightDAO();
+            switch (orderBy) {
+                case PLANE:
+                    flights = flightDAO.getOnTheWayOrderByPlane();
+                    break;
+                case ARRIVAL:
+                    flights = flightDAO.getOnTheWayOrderByArrival();
+                    break;
+                case DEPARTURE:
+                    flights = flightDAO.getOnTheWayOrderByDeparture();
+                    break;
+                case FROM_AIRPORT:
+                    flights = flightDAO.getOnTheWayOrderByFromAirport();
+                    break;
+                case TO_AIRPORT:
+                    flights = flightDAO.getOnTheWayOrderByToAirport();
+                    break;
+                case WILL_ARRIVE:
+                    flights = flightDAO.getOnTheWayOrderByWillArrive();
+                    break;
+            }
+
+            return flights;
+        } catch (DAOException e) {
+            throw new FlightServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Flight> getDeparting() throws FlightServiceException {
+        try {
+            return DAOFactory.getInstance().getFlightDAO().getDeparting();
+        } catch (DAOException e) {
+            throw new FlightServiceException(e);
+        }
     }
 }
