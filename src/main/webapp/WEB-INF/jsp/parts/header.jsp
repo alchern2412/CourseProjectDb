@@ -58,10 +58,14 @@
                                          bundle="${BundleContent}"></fmt:message>
                         </a>
                     </li>
-                        <%--                    Unregister--%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controller?command=track-flights">
+                        <a class="nav-link" href="/controller?command=track-flights&order=plane">
                             <fmt:message key="content.header.navitem.trackflights" bundle="${BundleContent}"></fmt:message>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/controller?command=export-import-xml">
+                            <fmt:message key="content.header.navitem.exportimportxml" bundle="${BundleContent}"></fmt:message>
                         </a>
                     </li>
                 </ul>
@@ -74,7 +78,7 @@
                     </li>
 <%--                    Unregister--%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/controller?command=track-flights">
+                        <a class="nav-link" href="/controller?command=track-flights&order=plane">
                             <fmt:message key="content.header.navitem.trackflights" bundle="${BundleContent}"></fmt:message>
                         </a>
                     </li>

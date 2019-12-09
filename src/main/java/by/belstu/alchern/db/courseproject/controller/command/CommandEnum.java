@@ -86,7 +86,23 @@ public enum CommandEnum {
         {
             this.command = new TrackFlightCommand();
         }
+    },
+    EXPORT_IMPORT_XML {
+        {
+            this.command = new ExportImportXmlCommand();
+        }
+    },
+    EXPORT_XML {
+        {
+            this.command = new ExportXmlCommand();
+        }
+    },
+    IMPORT_XML {
+        {
+            this.command = new ImportXmlCommand();
+        }
     }
+
     ;
     ActionCommand command;
     public ActionCommand getCurrentCommand() {

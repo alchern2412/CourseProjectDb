@@ -54,6 +54,9 @@ public class RequestParameterName {
     public static final String REQ_ATTR_PLANES_ON_THE_WAY = "planesOnTheWay";
     public static final String REQ_ATTR_PLANES_DEPARTING = "departingPlanes";
     public static final String REQ_PARAM_ORDER = "order";
+    public static final String REQ_ATTR_XML_EXPORT = "xmlExportText";
+    public static final String REQ_PARAM_XML_IMPORT_FILE = "xml-import-file";
+
 
 //    public static final String REQ_ATTR_USERS = "users";
 //    public static final String REQ_ATTR_USERS = "users";

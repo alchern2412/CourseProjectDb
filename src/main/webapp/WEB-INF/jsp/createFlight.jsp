@@ -72,19 +72,6 @@
                 </div>
             </div>
 
-            <%--            <div class="form-row mb-4">--%>
-            <%--                <div class="col">--%>
-            <%--                    <!-- Passengers -->--%>
-            <%--                    <fmt:message key="content.createflight.label.passengers" var="placeholderPassengers" bundle="${BundleContent}"/>--%>
-            <%--                    <input value="0" type="number" class="form-control" name="passengers" placeholder="${placeholderPassengers}">--%>
-            <%--                </div>--%>
-            <%--                <div class="col">--%>
-            <%--                    <!-- All Passengers -->--%>
-            <%--                    <fmt:message key="content.createflight.label.allpassengers" var="placeholderAllPassengers" bundle="${BundleContent}"/>--%>
-            <%--                    <input type="number" class="form-control" name="all-passengers" placeholder="${placeholderAllPassengers}">--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
-
             <div class="form-row mb-4">
                 <div class="col">
                     <!-- Price Flight -->
@@ -93,11 +80,6 @@
                     <input type="number" step="0.01" class="form-control" name="price-flight"
                            placeholder="${placeholderPriceFlight}">
                 </div>
-                <%--                <div class="col">--%>
-                <%--                    <!-- Price Luggage -->--%>
-                <%--                    <fmt:message key="content.createflight.label.priceluggage" var="placeholderPriceLuggage" bundle="${BundleContent}"/>--%>
-                <%--                    <input type="number" step="0.01" class="form-control" name="price-luggage" placeholder="${placeholderPriceLuggage}">--%>
-                <%--                </div>--%>
                 <div class="col">
                     <!-- Plane -->
                     <select name="plane" class="form-control" aria-describedby="planeHelpBlock">
@@ -111,12 +93,6 @@
                     </small>
                 </div>
             </div>
-
-
-            <%--            <!-- Description -->--%>
-            <%--            <fmt:message key="content.createflight.label.description" var="placeholderDescription" bundle="${BundleContent}"/>--%>
-            <%--            <input type="text" class="form-control mb-4" name="description" placeholder="${placeholderDescription}">--%>
-
 
             <button class="btn btn-info my-4 btn-block" type="submit">
                 <fmt:message key="content.createflight.button.createflight" bundle="${BundleContent}"></fmt:message>

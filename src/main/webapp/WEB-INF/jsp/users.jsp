@@ -22,7 +22,7 @@
 
         <c:if test="${param.page gt 1}">
             <li class="page-item">
-                <a class="page-link" href="http://localhost:8080/controller?command=all-users&page=${param.page - 1}"
+                <a class="page-link" href="/controller?command=all-users&page=${param.page - 1}"
                    tabindex="-1">
                     <fmt:message key="content.pagination.label.prev" bundle="${BundleContent}"></fmt:message>
                 </a>
@@ -30,7 +30,7 @@
         </c:if>
         <c:if test="${param.page <= 1}">
             <li class="page-item disabled">
-                <a class="page-link" href="http://localhost:8080/controller?command=all-users&page=${param.page - 1}"
+                <a class="page-link" href="/controller?command=all-users&page=${param.page - 1}"
                    tabindex="-1">
                     <fmt:message key="content.pagination.label.prev" bundle="${BundleContent}"></fmt:message>
                 </a>
@@ -39,20 +39,20 @@
         <c:if test="${param.page gt 1}">
             <li class="page-item">
                 <a class="page-link"
-                   href="http://localhost:8080/controller?command=all-users&page=${param.page - 1}">${param.page - 1}</a>
+                   href="/controller?command=all-users&page=${param.page - 1}">${param.page - 1}</a>
             </li>
         </c:if>
         <li class="page-item active">
             <a class="page-link"
-               href="http://localhost:8080/controller?command=all-users&page=${param.page}">${param.page}<span
+               href="/controller?command=all-users&page=${param.page}">${param.page}<span
                     class="sr-only">(current)</span></a>
         </li>
         <li class="page-item"><a class="page-link"
-                                 href="http://localhost:8080/controller?command=all-users&page=${param.page + 1}">${param.page + 1}</a>
+                                 href="/controller?command=all-users&page=${param.page + 1}">${param.page + 1}</a>
         </li>
         <li class="page-item">
             <a class="page-link"
-               href="http://localhost:8080/controller?command=all-users&page=${param.page + 1}">
+               href="/controller?command=all-users&page=${param.page + 1}">
                 <fmt:message key="content.pagination.label.next" bundle="${BundleContent}"></fmt:message>
             </a>
         </li>

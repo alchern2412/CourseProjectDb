@@ -23,6 +23,11 @@ public class SqlCountryDAO implements CountryDAO {
     private static final String UPDATE = "{call usp_countriesUpdate(?, ?)}";
     private static final String DELETE = "{call usp_countriesDelete(?)}";
 
+    // services
+    private static final String EXPORT_XML = "{call usp_countriesExportXml}";
+    private static final String IMPORT_XML = "{call usp_countriesImportXml(?)}";
+
+
     @Override
     public Country get(int id) throws CountryDAOException {
         Country country = null;
@@ -154,5 +159,50 @@ public class SqlCountryDAO implements CountryDAO {
             SqlDAO.putBackConnection(connection);
         }
 
+    }
+
+    @Override
+    public String exportXml() throws CountryDAOException {
+        String xmlText = null;
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(EXPORT_XML);
+            boolean hadResults = callableStatement.execute();
+
+            if (hadResults) {
+                resultSet = callableStatement.getResultSet();
+                if (resultSet.next()) {
+                    xmlText = resultSet.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new CountryDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
+
+        return xmlText;
+    }
+
+    @Override
+    public void importXml(String path) throws CountryDAOException {
+        Connection connection = ConnectionPool.getInstance().takeConnection();
+        ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
+        try {
+            callableStatement = connection.prepareCall(IMPORT_XML);
+            callableStatement.setString(1, path);
+            boolean hadResults = callableStatement.execute();
+        } catch (SQLException e) {
+            throw new CountryDAOException(e);
+        } finally {
+            SqlDAO.closeResultSet(resultSet);
+            SqlDAO.closeCallableStatement(callableStatement);
+            SqlDAO.putBackConnection(connection);
+        }
     }
 }
